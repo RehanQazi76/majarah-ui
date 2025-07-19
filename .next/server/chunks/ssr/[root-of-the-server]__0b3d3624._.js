@@ -452,22 +452,22 @@ function HeroSection() {
     ];
     const brandSizes = {
         1: 'w-40 h-auto md:w-80',
-        2: 'h-14',
-        3: 'w-40 md:w-[0px] h-auto',
-        4: 'h-10',
+        2: 'h-14 md:w-[150px] h-auto',
+        3: 'w-40 md:w-[150px] h-auto',
+        4: 'h-10 md:w-[100px] h-auto',
         5: 'w-32 h-auto',
         6: 'h-12',
         7: 'h-16',
-        8: 'h-20',
-        9: 'h-14',
+        8: 'h-20 ',
+        9: 'h-14 md:w-[100px] h-auto',
         10: 'h-24',
         11: 'h-12',
-        12: 'h-10',
-        13: 'h-16',
+        12: 'h-10 md:w-[100px] h-auto',
+        13: 'h-16 md:w-[100px] h-auto',
         14: 'h-20',
         15: 'h-14',
-        16: 'h-14',
-        17: 'h-14',
+        16: 'h-14 md:w-[150px] h-auto',
+        17: 'h-14 md:w-[150px] h-auto',
         18: 'h-14'
     };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{

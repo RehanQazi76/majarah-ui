@@ -2701,6 +2701,12 @@
   }
 
   @media (width >= 48rem) {
+    .md\:w-\[150px\] {
+      width: 150px;
+    }
+  }
+
+  @media (width >= 48rem) {
     .md\:w-\[160px\] {
       width: 160px;
     }
