@@ -8,6 +8,7 @@ import ContactReachUs from '@/components/ContactReachUs';
 import  { Footer } from '@/components/Footer';
 import Testimonials from "@/components/Testimonials"
 import ParallaxWrapper from '@/components/ParallaxWrapper';
+import ScrollControlledVideo from './ui/ScrollControlledVideo';
 
 
 function Card({ title, description, children }: any) {
@@ -42,7 +43,7 @@ export default function WhatWeDoBest() {
   
   
     <div className="w-full min-h-screen px-0 py-0 text-white font-sans mt-20 bg-[#0e0e0e]">
-      <div className="text-center mb-12">
+      <div className="text-center mb-12" id='services'>
         <h2 className="text-3xl md:text-5xl font-aeonik font-regular text-white">What We Do Best</h2>
         <p className=" font-poppins font-regular text-gray-400 mt-3">From Strategy to Spotlight — We Do it All.</p>
       </div>
@@ -193,7 +194,7 @@ export default function WhatWeDoBest() {
   <div className="absolute  top-[1150px] md:top-[600px] left-0 w-full h-[1000px] bg-[linear-gradient(to_left,_#4899E3_-50%,_transparent_40%)] z-0 pointer-events-none blur-[100px]" />
 
   {/* ✅ FACE BEHIND MAJARAH SECTION */}
-  <div className="text-center mb-10 mt-35">
+  <div className="text-center mb-10 mt-35" id='aboutus'>
   <h2 className="text-5xl font-aeonik font-light">
     Face Behind <span className="bg-gradient-to-r from-[#4899E3] to-[#8EC6FA] text-transparent bg-clip-text animate-gradient-x">Majarah</span>
   </h2>
@@ -206,22 +207,25 @@ export default function WhatWeDoBest() {
       <span className="bg-gradient-to-r from-[#4899E3] to-[#8EC6FA] text-transparent bg-clip-text animate-gradient-x">Eisa Al Habib</span>
     </h2>
     <p className="text-base sm:text-lg md:text-lg lg:text-2xl text-gray-300 leading-relaxed mb-6 font-poppins font-light max-w-md md:mr-30 w-[90%]">
-      Emmy Award winner and Forbes-recognized creator, leads Majarah with a bold, viral-first vision. His content bridges culture, creativity, and influence across platforms.
+      International Emmys Young Creatives Award winner and Forbes-recognized creator, leads Majarah with a bold, viral-first vision. His content bridges culture, creativity, and influence across platforms.
     </p>
 
     {/* Social Icons */}
     <div className="flex items-center justify-center md:justify-start gap-6  mb-20 md:mb-10 mt-10">
       {[
-        { src: "/icons/twitterlogo.svg", alt: "Twitter" },
-        { src: "/icons/instagramlogo.svg", alt: "Instagram" },
-        { src: "/icons/dribblelogo.svg", alt: "Dribbble" },
-        { src: "/icons/maillogo.svg", alt: "Mail" },
+        { src: "/icons/SMlogo/youtube.svg", alt: "YouTube" , link: "https://www.youtube.com/@eisayo"},
+        { src: "/icons/SMlogo/tiktok.svg", alt: "TikTok" , link: "https://www.tiktok.com/@eisayo?lang=en"},
+        { src: "/icons/instagramlogo.svg", alt: "Instagram" , link: "https://www.instagram.com/eisayo/"},
+        { src: "/icons/SMlogo/linkedin.svg", alt: "Linkedin", link: "https://www.linkedin.com/in/eisa-alhabib/" },
+        
       ].map((icon, index) => (
         <div
           key={index}
           className="w-10 h-10 rounded-full bg-[#343236] flex items-center justify-center transition-transform duration-300 hover:scale-110 hover:shadow-lg hover:bg-[#4a484b] border border-[#595959]"
         >
-          <img src={icon.src} alt={icon.alt} className="w-5 h-5" />
+          <a href={icon.link} target="_blank" rel="noopener noreferrer">
+            <img src={icon.src} alt={icon.alt} className="w-7 h-7" />
+          </a>
         </div>
       ))}
     </div>
@@ -288,7 +292,7 @@ export default function WhatWeDoBest() {
   <div className="absolute bottom-0 left-0 w-full  h-[30vh] md:h-[50vh] bg-gradient-to-t from-[#4899E3] to-transparent rounded-xl opacity-60" />
 </div>
           <div className="bg-gradient-to-tl from-[#1B091E] to-[#792884] rounded-xl p-4 flex flex-col justify-center items-start h-[300px] md:h-[400px]">
-  <p className="text-xl md:text-3xl font-inter font-bold text-white">4.4M+</p>
+  <p className="text-xl md:text-3xl font-inter font-bold text-white">4.7M+</p>
   <p className="text-sm md:text-xl text-gray-300 font-inter font-bold">Followers</p>
 </div>
  <div className="relative overflow-visible w-full h-full">
@@ -305,7 +309,9 @@ export default function WhatWeDoBest() {
     </motion.div>
   </div>
 </div>
-
+ <div>
+      <ScrollControlledVideo />
+    </div>
 
   {/* ✅ TESTIMONIAL SECTION */}
   <div className="w-full relative z-20">
@@ -322,7 +328,10 @@ export default function WhatWeDoBest() {
 
   {/* Content */}
   <Footersection />
-  <ContactReachUs />
+  <div id ="contact">
+    <ContactReachUs />
+  </div>
+  
   <Footer />
 </div>
   

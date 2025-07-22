@@ -69,15 +69,17 @@ export default function HeroSection() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[50vh] md:h-[80vh] bg-[radial-gradient(ellipse_at_top,_#4899E3_30%,_transparent_70%)] opacity-20 blur-4xl pointer-events-none z-0" />
 
         {/* Navbar */}
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-4 ">
           <img src="/icons/majarahlogo.svg" alt="Majarah Logo" className="w-60 md:w-60 h-auto" />
 
           <div className="hidden md:flex justify-between items-center w-full py-2">
             <div className="mx-auto flex items-center space-x-6 ml-65">
               <div className="flex space-x-4 px-5 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
-                {["About Us", "Services", "Work", "Project"].map((item, idx) => (
-                  <HoverNavLink key={idx} label={item} href="#" />
-                ))}
+                
+                <HoverNavLink key={0} label= "About us" href="#aboutus" />
+                <HoverNavLink key={1} label="Services" href="#services" />
+                {/* <HoverNavLink key={2} label="Work" href="#work" /> */}
+                <HoverNavLink key={3} label="Project" href="#project" />
               </div>
             </div>
 
@@ -156,7 +158,7 @@ export default function HeroSection() {
             </p>
 
             <motion.a
-              href="#"
+              href="#contact"
               whileHover={{ scale: 1.05 }}
               className="inline-block mt-10 px-6 py-2 border border-[#5AA5E9] bg-[linear-gradient(to_bottom,_#5AA5E9_-150%,_transparent_60%)] text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 mb-10 md:mb-0"
             >

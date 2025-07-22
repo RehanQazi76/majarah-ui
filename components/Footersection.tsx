@@ -17,14 +17,7 @@ export const FooterTop = () => {
         Go <span className="bg-gradient-to-r from-[#4899E3] to-[#8EC6FA] text-transparent bg-clip-text animate-gradient-x">Impact</span> with <span className="bg-gradient-to-r from-[#4899E3] to-[#8EC6FA] text-transparent bg-clip-text animate-gradient-x">Us</span>.
       </h1>
 
-      {/* Button */}
-      <motion.a
-        whileHover={{ scale: 1.05 }}
-        href="#contact"
-        className="inline-block mt-10 px-6 py-2 bg-[linear-gradient(to_bottom,_#5AA5E9_-150%,_transparent_60%)] text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 border border-[#5AA5E9] font-poppins font-regular"
-      >
-        Contact Us Today →
-      </motion.a>
+      
     </section>
   );
 };

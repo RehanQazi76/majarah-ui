@@ -54,11 +54,9 @@ export const Footer = () => {
         >
           <h4 className="font-poppins font-medium text-gray-200 mb-4">Quick Links</h4>
           <ul className="font-poppins font-medium space-y-5 text-sm text-gray-400">
-            <li><a href="#" className="hover:text-white transition-colors duration-300">About Us</a></li>
-            <li><a href="#" className="hover:text-white transition-colors duration-300">Services</a></li>
+            <li><a href="#aboutus" className="hover:text-white transition-colors duration-300">About Us</a></li>
+            <li><a href="#services" className="hover:text-white transition-colors duration-300">Services</a></li>
             <li><a href="#" className="hover:text-white transition-colors duration-300">Our Work</a></li>
-            <li><a href="#" className="hover:text-white transition-colors duration-300">The CEO</a></li>
-            <li><a href="#" className="hover:text-white transition-colors duration-300">Contact</a></li>
             <li><a href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</a></li>
           </ul>
         </motion.div>
@@ -89,10 +87,10 @@ export const Footer = () => {
         >
           <h4 className="font-poppins font-medium text-gray-200 mb-4">Follow Us</h4>
           <div className="flex space-x-4 text-gray-400 text-xl">
-            <FaYoutube className="hover:text-white transition-colors duration-300" />
-            <FaInstagram className="hover:text-white transition-colors duration-300" />
-            <FaFacebookF className="hover:text-white transition-colors duration-300" />
-            <FaTiktok className="hover:text-white transition-colors duration-300" />
+            <FaYoutube className="hover:text-white transition-colors duration-300" href='https://www.youtube.com/@eisayo'/>
+            <FaInstagram className="hover:text-white transition-colors duration-300"href='https://www.instagram.com/eisayo/' />
+            <FaFacebookF className="hover:text-white transition-colors duration-300" href='https://www.facebook.com/Eisayo/' />
+            <FaTiktok className="hover:text-white transition-colors duration-300" href='https://www.tiktok.com/@eisayo?lang=en'/>
           </div>
         </motion.div>
       </div>
