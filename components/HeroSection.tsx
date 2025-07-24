@@ -108,9 +108,10 @@ export default function HeroSection() {
         {/* Mobile Nav Menu */}
         {menuOpen && (
           <div className="md:hidden flex flex-col items-center gap-4 mt-4 py-4 px-4 bg-[#1B2B40]/80 rounded-xl border border-white/10 backdrop-blur-sm">
-            {["About Us", "Services", "Work", "Project"].map((item, idx) => (
-              <HoverNavLink key={idx} label={item} href="#" />
-            ))}
+             <HoverNavLink key={0} label= "About us" href="#aboutus" />
+                <HoverNavLink key={1} label="Services" href="#services" />
+                {/* <HoverNavLink key={2} label="Work" href="#work" /> */}
+                <HoverNavLink key={3} label="Project" href="#project" />
             <a
               href="#contact"
               className="inline-flex items-center justify-center h-10 px-6 rounded-full bg-[#1B2B40] border border-white/10 text-sm font-poppins text-white hover:bg-[#26364e] transition"
