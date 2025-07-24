@@ -133,12 +133,11 @@ type FormData = {
   businessSize: string;
   yearsInBusiness: string;
   primaryInterest: string;
-  secondaryInterests: string[];
   preferredCallTime: string;
   budget: string;
 };
 
-type RequiredField = 'businessName' | 'fullName' | 'email' | 'phone' | 'selectedDate' | 'inquiry' | 'referralSource' | 'budget';
+type RequiredField = 'businessName' | 'fullName' | 'email' | 'phone' | 'selectedDate' | 'inquiry' | 'referralSource';
 
 export default function ContactForm() {
   const [isOrganization, setIsOrganization] = useState(true);
@@ -156,15 +155,16 @@ export default function ContactForm() {
     businessSize: businessSizeOptions[0].value,
     yearsInBusiness: '',
     primaryInterest: '',
-    secondaryInterests: [],
     preferredCallTime: '',
     budget: '',
   });
 
+  const [dateKey, setDateKey] = useState(0);
+
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validate = (): boolean => {
-    const requiredFields: RequiredField[] = ['fullName', 'email', 'phone', 'selectedDate', 'inquiry', 'referralSource', 'budget'];
+    const requiredFields: RequiredField[] = ['fullName', 'email', 'phone', 'selectedDate', 'inquiry', 'referralSource'];
     if (isOrganization) requiredFields.push('businessName');
     const newErrors: Record<string, string> = {};
     requiredFields.forEach((field) => {
@@ -174,29 +174,46 @@ export default function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!validate()) return;
 
-    try {
-      await sanityClient.create({
-        _type: 'contact',
-        ...formData,
-        selectedDate: formData.selectedDate ? new Date(formData.selectedDate).toISOString() : null,
-        submittedAt: new Date().toISOString(),
-        contactType: isOrganization ? 'organization' : 'individual',
-      });
-      alert('Message sent successfully!');
-      setFormData({
-        businessName: '', fullName: '', email: '', phone: '', countryCode: countries[0].value,
-        selectedDate: null, inquiry: '', referralSource: '', businessSize: businessSizeOptions[0].value,
-        yearsInBusiness: '', primaryInterest: '', secondaryInterests: [], preferredCallTime: '', budget: '',
-      });
-    } catch (error) {
-      console.error(error);
-      alert('Submission failed. Try again.');
-    }
-  };
+  try {
+    await sanityClient.create({
+      _type: 'contact',
+      ...formData,
+      selectedDate: formData.selectedDate ? new Date(formData.selectedDate).toISOString() : null,
+      submittedAt: new Date().toISOString(),
+      contactType: isOrganization ? 'organization' : 'individual',
+    });
+
+    alert('Message sent successfully!');
+
+    // Reset form
+    setFormData({
+      businessName: '',
+      fullName: '',
+      email: '',
+      phone: '',
+      countryCode: countries[0].value,
+      selectedDate: null,
+      inquiry: '',
+      referralSource: '',
+      businessSize: businessSizeOptions[0].value,
+      yearsInBusiness: '',
+      primaryInterest: '',
+      preferredCallTime: '',
+      budget: '',
+    });
+
+    setDateKey(prev => prev + 1);
+
+  } catch (error) {
+    console.error(error);
+    alert('Submission failed. Try again.');
+  }
+};
+
 
   return (
     <form
@@ -204,24 +221,24 @@ export default function ContactForm() {
       className="mt-20 bg-[linear-gradient(to_bottom,_#4899E3_-130%,_transparent_30%)] border border-[#55A1E7] shadow-[0_0_30px_3px_#55A1E7] max-w-2xl mx-auto p-4 space-y-10 rounded-lg font-poppins text-white text-lg font-semibold"
     >
      {/* Toggle Button */}
-<div className="flex flex-col items-center space-y-2 mb-4 font-poppins font-light text-white text-lg">
+   <div className="flex flex-col items-center space-y-2 mb-4 font-poppins font-light text-white text-lg">
   <label className="mb-4 mt-5">Choose User Type</label>
 
   <button
     type="button"
     onClick={toggleUserType}
-    className="relative w-[200px] h-10 rounded-full border border-white text-lg font-semibold transition-colors duration-300 mb-5 bg-transparent text-white px-2"
+    className="relative w-[220px] h-10 rounded-full border border-white text-lg font-semibold transition-colors duration-300 mb-5 bg-transparent text-white px-2"
   >
     {/* Knob */}
     <div
       className={`absolute top-1 w-8 h-8 rounded-full bg-white shadow-md transition-transform duration-300 ${
-        isOrganization ? 'translate-x-[150px]' : 'translate-x-0'
+        isOrganization ? 'translate-x-[170px]' : 'translate-x-0'
       }`}
     ></div>
 
     {/* Centered Text */}
-    <span className="relative z-10 block w-full text-center ml-1">
-      {isOrganization ? 'Individual' : 'Organization'}
+    <span className="relative z-10 block w-full text-center">
+      {isOrganization ? 'Organization' : 'Individual'}
     </span>
   </button>
 </div>
@@ -251,7 +268,12 @@ export default function ContactForm() {
       </div>
 
       <label className="block mb-1">Date of Submission *</label>
-      <DatePicker selected={formData.selectedDate} onChange={(date) => setFormData({ ...formData, selectedDate: date })} customInput={<CustomInput />} />
+      <DatePicker
+      key={dateKey}
+      selected={formData.selectedDate}
+      onChange={(date) => setFormData({ ...formData, selectedDate: date })}
+      customInput={<CustomInput />}
+    />
 
       <label className="block mb-1">I am interested in *</label>
       <Select options={interestedOptions.map(opt => ({ label: <span>{opt}</span>, value: opt }))} styles={customStyles} onChange={(val) => val && setFormData({ ...formData, primaryInterest: val.value })} />
