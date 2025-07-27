@@ -200,7 +200,7 @@ export const countries = [
 ];
 
 // Custom option component to display flag and country name
-export const CustomOption = ({ data, innerProps, ...props }: any) => (
+export const CustomOption = ({ data, innerProps }: any) => (
   <div {...innerProps} className="flex items-center gap-2 py-1 px-2">
     <img 
       src={`https://flagcdn.com/w40/${data.flag}.png`} 
@@ -212,8 +212,8 @@ export const CustomOption = ({ data, innerProps, ...props }: any) => (
 );
 
 // Custom single value component
-export const CustomSingleValue = ({ data, children, ...props }: any) => (
-  <div {...props} className="flex items-center gap-2">
+export const CustomSingleValue = ({ data }: any) => (
+  <div className="flex items-center gap-2">
     <img 
       src={`https://flagcdn.com/w40/${data.flag}.png`} 
       className="w-5 h-4" 
