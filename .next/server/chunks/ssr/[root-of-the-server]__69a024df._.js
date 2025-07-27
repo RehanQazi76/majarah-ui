@@ -165,10 +165,17 @@ __turbopack_context__.s({
     "default": (()=>__TURBOPACK__default__export__)
 });
 const contactFormSchema = {
-    name: 'contact',
-    title: 'Contact Submissions',
+    name: 'organizationContact',
+    title: 'Organization Contact Submissions',
     type: 'document',
     fields: [
+        {
+            name: 'contactType',
+            title: 'Contact Type',
+            type: 'string',
+            initialValue: ()=>'organization',
+            readOnly: true
+        },
         {
             name: 'businessName',
             title: 'Business Name',
@@ -208,16 +215,6 @@ const contactFormSchema = {
             title: 'Primary Interest',
             type: 'string',
             validation: (Rule)=>Rule.required()
-        },
-        {
-            name: 'secondaryInterests',
-            title: 'Secondary Interests',
-            type: 'array',
-            of: [
-                {
-                    type: 'string'
-                }
-            ]
         },
         {
             name: 'inquiry',
