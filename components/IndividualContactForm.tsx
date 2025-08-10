@@ -261,7 +261,7 @@ export default function IndividualContactForm() {
         className="w-full border border-gray-600 rounded px-3 py-2 text-lg font-light" 
       />
 
-      <label className="block mb-1">Budget (AED) - Monthly or per project *</label>
+      <label className="block mb-1">Budget (AED) - Monthly or per project </label>
       <input 
         name="budget" 
         type="number" 

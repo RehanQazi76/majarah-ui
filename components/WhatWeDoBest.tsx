@@ -642,7 +642,7 @@ transition={{
 
 
   {/* ✅ TESTIMONIAL SECTION */}
-  <div className="w-full relative z-20">
+  <div className="w-full relative z-20" id ='Testimonials'>
   <Testimonials />
 </div>
 

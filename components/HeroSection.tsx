@@ -61,7 +61,7 @@ export default function HeroSection() {
                 style={{ fontSize: 'clamp(0.75rem, 1.2vw, 1.25rem)' }}>
                 <HoverNavLink label="About us" href="#aboutus" />
                 <HoverNavLink label="Services" href="#services" />
-                <HoverNavLink label="Project" href="#project" />
+                <HoverNavLink label="What People Say" href="#Testimonials" />
               </div>
             </div>
             <div className="ml-auto">
@@ -83,7 +83,7 @@ export default function HeroSection() {
           <div className="md:hidden flex flex-col items-center gap-4 mt-4 py-4 px-4 bg-[#1B2B40]/80 rounded-xl border border-white/10 backdrop-blur-sm">
             <HoverNavLink label="About us" href="#aboutus" />
             <HoverNavLink label="Services" href="#services" />
-            <HoverNavLink label="Project" href="#project" />
+            <HoverNavLink label="Project" href="#services" />
             <a href="#contact" className="inline-flex items-center justify-center h-10 px-6 rounded-full bg-[#1B2B40] border border-white/10 text-sm font-poppins text-white hover:bg-[#26364e] transition">Contact Us</a>
           </div>
         )}

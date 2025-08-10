@@ -26,6 +26,24 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}>
         {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('click', function(e) {
+                  if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = e.target.getAttribute('href')?.substring(1);
+                    const element = document.getElementById(targetId);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }
+                });
+              });
+            `,
+          }}
+        />
       </body>
     </html>
   );
