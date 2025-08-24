@@ -91,7 +91,7 @@ export const Footer = () => {
           <ul className="font-poppins font-medium text-[clamp(0.75rem,1.1vw,1.125rem)] text-gray-400 space-y-[clamp(0.5rem,1vw,1.25rem)]">
             <li className="hover:text-white transition-colors duration-300">info@majarah.co</li>
             <li className="hover:text-white transition-colors duration-300">
-              <a href="#aboutus">www.majarah.co</a>
+              <a href="#hero">www.majarah.co</a>
             </li>
             <li className="hover:text-white transition-colors duration-300">
               Dubai,<br />United Arab Emirates
