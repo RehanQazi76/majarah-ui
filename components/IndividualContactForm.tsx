@@ -49,11 +49,19 @@ const customStyles: StylesConfig<{ label: ReactNode; value: string }, false> = {
   control: (base) => ({
     ...base,
     background: 'transparent',
-    minHeight: '48px',
+    minHeight: '36px', // 👈 reduced height
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 300,
     color: 'white',
     fontSize: '1.125rem',
+    display: 'flex',
+    alignItems: 'center',
+  }),
+  valueContainer: (base) => ({
+    ...base,
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 6px',
   }),
   menu: (base) => ({
     ...base,
@@ -87,12 +95,17 @@ const customStyles: StylesConfig<{ label: ReactNode; value: string }, false> = {
     color: 'white',
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 300,
+    position: 'static',   // keeps value inline
+    transform: 'none',    // removes translateY shift
+    margin: 0,
   }),
   input: (base) => ({
     ...base,
     color: 'white',
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 300,
+    margin: 0,
+    padding: 0,           //prevents pushing to new line
   }),
   placeholder: (base) => ({
     ...base,
@@ -105,6 +118,7 @@ const customStyles: StylesConfig<{ label: ReactNode; value: string }, false> = {
     color: '#ffffff',
   }),
 };
+
 
 type IndividualFormData = {
   fullName: string;
@@ -119,14 +133,14 @@ type IndividualFormData = {
   budget: string;
 };
 
-type RequiredField = 'fullName' | 'email' | 'phone' | 'selectedDate' | 'inquiry' | 'referralSource';
+type RequiredField = 'fullName' | 'email' | 'phone' | 'selectedDate' | 'inquiry';
 
 export default function IndividualContactForm() {
   const [formData, setFormData] = useState<IndividualFormData>({
     fullName: '',
     email: '',
     phone: '',
-    countryCode: countries[0].value,
+    countryCode: countries[184].value,
     selectedDate: null,
     inquiry: '',
     referralSource: '',
@@ -139,7 +153,7 @@ export default function IndividualContactForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validate = (): boolean => {
-    const requiredFields: RequiredField[] = ['fullName', 'email', 'phone', 'selectedDate', 'inquiry', 'referralSource'];
+    const requiredFields: RequiredField[] = ['fullName', 'email', 'phone', 'selectedDate', 'inquiry'];
     const newErrors: Record<string, string> = {};
     requiredFields.forEach((field) => {
       if (!formData[field]) newErrors[field] = 'Required';
@@ -168,7 +182,7 @@ export default function IndividualContactForm() {
         fullName: '',
         email: '',
         phone: '',
-        countryCode: countries[0].value,
+        countryCode: countries[184].value,
         selectedDate: null,
         inquiry: '',
         referralSource: '',
@@ -201,6 +215,7 @@ export default function IndividualContactForm() {
         placeholder="Full Name" 
         className="w-full border border-gray-600 rounded px-3 py-2 text-lg font-light" 
       />
+      {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
 
       <label className="block mb-1">Email *</label>
       <input 
@@ -211,6 +226,7 @@ export default function IndividualContactForm() {
         placeholder="Email" 
         className="w-full border border-gray-600 rounded px-3 py-2 text-lg font-light" 
       />
+      {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
 
       <label className="block mb-1">Phone *</label>
       <div className="flex gap-2">
@@ -227,12 +243,21 @@ export default function IndividualContactForm() {
           }}
         />
         <input 
-          name="phone" 
-          value={formData.phone} 
-          onChange={(e) => setFormData({ ...formData, phone: e.target.value })} 
-          placeholder="Phone" 
-          className="w-2/3 border border-gray-600 rounded px-3 py-2 text-lg font-light" 
+        type="tel"
+        inputMode="numeric"
+        pattern="[0-9]*"
+        name="phone" 
+        value={formData.phone} 
+        onChange={(e) => {
+          const value = e.target.value;
+          if (/^\d*$/.test(value)) {
+            setFormData({ ...formData, phone: value });
+          }
+        }} 
+        placeholder="Phone" 
+        className="w-2/3 border border-gray-600 rounded px-3 py-2 text-lg font-light" 
         />
+        {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
       </div>
 
       <label className="block mb-1">Date of Submission *</label>
@@ -242,6 +267,7 @@ export default function IndividualContactForm() {
         onChange={(date) => setFormData({ ...formData, selectedDate: date })}
         customInput={<CustomInput />}
       />
+      {errors.selectedDate && <p className="text-red-500 text-sm mt-1">{errors.selectedDate}</p>}
 
       <label className="block mb-1">I am interested in *</label>
       <Select 
@@ -252,6 +278,9 @@ export default function IndividualContactForm() {
         placeholder="Select an option"
         isClearable={false}
       />
+      {errors.primaryInterest && (
+        <p className="text-red-500 text-sm mt-1">{errors.primaryInterest}</p>
+      )}
 
       <label className="block mb-1">Inquiry Details *</label>
       <textarea 
@@ -260,8 +289,9 @@ export default function IndividualContactForm() {
         onChange={(e) => setFormData({ ...formData, inquiry: e.target.value })} 
         className="w-full border border-gray-600 rounded px-3 py-2 text-lg font-light" 
       />
+      {errors.inquiry && <p className="text-red-500 text-sm mt-1">{errors.inquiry}</p>}
 
-      <label className="block mb-1">Budget (AED) - Monthly or per project *</label>
+      <label className="block mb-1">Budget (AED) - Monthly or per project </label>
       <input 
         name="budget" 
         type="number" 
@@ -280,7 +310,7 @@ export default function IndividualContactForm() {
         isClearable={false}
       />
 
-      <label className="block mb-1">Where did you hear about us? *</label>
+      <label className="block mb-1">Where did you hear about us?</label>
       <input 
         name="referralSource" 
         value={formData.referralSource} 

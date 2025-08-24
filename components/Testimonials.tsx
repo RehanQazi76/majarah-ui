@@ -1,4 +1,4 @@
-'use client';
+/*'use client';
 
 import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
@@ -19,7 +19,7 @@ export default function Testimonials() {
     controls1.start({
       x: ['0%', '-50%'],
       transition: {
-        duration: 70, // Slower animation (was 25)
+        duration: 70,
         ease: 'linear',
         repeat: Infinity,
       },
@@ -28,7 +28,7 @@ export default function Testimonials() {
     controls2.start({
       x: ['-50%', '0%'],
       transition: {
-        duration: 70, // Slower animation (was 25)
+        duration: 70,
         ease: 'linear',
         repeat: Infinity,
       },
@@ -161,7 +161,8 @@ export default function Testimonials() {
       </h2>
     </div>
 
-    {/* Row 1 */}
+    { Row 1 }
+
     <div className="w-full px-0 mb-10 relative z-20">
       <motion.div className="flex gap-6 w-max" animate={controls1}>
         {[...Array(3)].map((_, i) => (
@@ -170,7 +171,7 @@ export default function Testimonials() {
       </motion.div>
     </div>
 
-    {/* Row 2 */}
+    { Row 2 }
     <div className="relative w-full px-5 z-10">
       <div className="absolute inset-0 bg-[linear-gradient(to_top,_#4899E3_-100%,_transparent_40%)] z-0 pointer-events-none px-10" />
       <div className="relative flex gap-6 w-max z-10">
@@ -185,3 +186,4 @@ export default function Testimonials() {
 );
 
 }
+*/

@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import OrganizationContactForm from './OrganizationContactForm';
 import IndividualContactForm from './IndividualContactForm';

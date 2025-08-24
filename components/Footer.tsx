@@ -60,7 +60,7 @@ export const Footer = () => {
             {[
               { label: 'About Us', href: '#aboutus' },
               { label: 'Services', href: '#services' },
-              { label: 'Our Work', href: '#' },
+              { label: 'Our Work', href: '#services' },
               { label: 'Privacy Policy', href: '#aboutus' }, // redirecting to AboutUs
             ].map(({ label, href }) => (
               <li key={label}>

@@ -49,6 +49,11 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Prevent hash links from changing URL */
+a[href^="#"] {
+  scroll-margin-top: 2rem;
+}
+
 @font-face {
   font-family: 'Aeonik TRIAL';
   src: url('/fonts/AeonikTRIAL-Bold.woff2') format('woff2');
@@ -141,4 +146,3 @@ body {
     /*background: linear-gradient(to bottom, #1B2B40 -150%, transparent 60%);*/
   }
 }
-

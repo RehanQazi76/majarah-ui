@@ -19,13 +19,26 @@ interface ContactFormSchema {
 }
 
 const contactFormSchema: ContactFormSchema = {
-    name: 'contact',
-    title: 'Contact Submissions',
+    name: 'organizationContact',
+    title: 'Organization Contact Submissions',
     type: 'document',
     fields: [
         {
+            name: 'contactType',
+            title: 'Contact Type',
+            type: 'string',
+            initialValue: () => 'organization',
+            readOnly: true
+        },
+        {
             name: 'businessName',
             title: 'Business Name',
+            type: 'string',
+            validation: (Rule: Rule) => Rule.required()
+        },
+        {
+            name: 'businessType',
+            title: 'Business Type',
             type: 'string',
             validation: (Rule: Rule) => Rule.required()
         },
@@ -63,12 +76,7 @@ const contactFormSchema: ContactFormSchema = {
             type: 'string',
             validation: (Rule: Rule) => Rule.required()
         },
-        {
-            name: 'secondaryInterests',
-            title: 'Secondary Interests',
-            type: 'array',
-            of: [{ type: 'string' }],
-        },
+        
         {
             name: 'inquiry',
             title: 'Inquiry Details',
@@ -78,7 +86,7 @@ const contactFormSchema: ContactFormSchema = {
         {
             name: 'budget',
             title: 'Budget (Monthly)',
-            type: 'number',
+            type: 'string',
             validation: (Rule: Rule) => Rule.min(0)
         },
         {
@@ -100,7 +108,6 @@ const contactFormSchema: ContactFormSchema = {
             name: 'referralSource',
             title: 'Referral Source',
             type: 'string',
-            validation: (Rule: Rule) => Rule.required()
         },
         {
             name: 'submittedAt',
