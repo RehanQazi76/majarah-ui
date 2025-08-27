@@ -125,7 +125,7 @@ export const Footer = () => {
         whileInView="show"
         className="font-poppins font-medium text-[clamp(0.75rem,1vw,1rem)] text-gray-600 pt-[clamp(1rem,2vw,2.5rem)] text-center mt-[clamp(1.5rem,3vw,3rem)]"
       >
-        ©2025{' '}
+        ©2024{' '}
         <a
           href="#aboutus"
           className="text-gray-600 hover:text-blue-400 transition-colors duration-300 underline-offset-4"

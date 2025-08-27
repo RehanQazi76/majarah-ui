@@ -128,7 +128,8 @@ type IndividualFormData = {
   selectedDate: Date | null;
   inquiry: string;
   referralSource: string;
-  primaryInterest: string;
+  primaryInterest: string[];
+  otherInterests: string;
   preferredCallTime: string;
   budget: string;
 };
@@ -144,7 +145,8 @@ export default function IndividualContactForm() {
     selectedDate: null,
     inquiry: '',
     referralSource: '',
-    primaryInterest: '',
+    primaryInterest: [],
+    otherInterests: '',
     preferredCallTime: '',
     budget: '',
   });
@@ -158,6 +160,12 @@ export default function IndividualContactForm() {
     requiredFields.forEach((field) => {
       if (!formData[field]) newErrors[field] = 'Required';
     });
+    
+    // Validate primaryInterest array
+    if (formData.primaryInterest.length === 0) {
+      newErrors.primaryInterest = 'Please select at least one option';
+    }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -186,7 +194,8 @@ export default function IndividualContactForm() {
         selectedDate: null,
         inquiry: '',
         referralSource: '',
-        primaryInterest: '',
+        primaryInterest: [],
+        otherInterests: '',
         preferredCallTime: '',
         budget: '',
       });
@@ -270,17 +279,38 @@ export default function IndividualContactForm() {
       {errors.selectedDate && <p className="text-red-500 text-sm mt-1">{errors.selectedDate}</p>}
 
       <label className="block mb-1">I am interested in *</label>
-      <Select 
-        options={interestedOptions.map(opt => ({ label: <span>{opt}</span>, value: opt }))} 
-        styles={customStyles} 
-        value={formData.primaryInterest ? { label: <span>{formData.primaryInterest}</span>, value: formData.primaryInterest } : null}
-        onChange={(val) => setFormData({ ...formData, primaryInterest: val ? val.value : '' })} 
-        placeholder="Select an option"
-        isClearable={false}
-      />
+      <div className="space-y-2 border border-gray-600 rounded px-3 py-2 bg-transparent">
+        {interestedOptions.map((option) => (
+          <label key={option} className="flex items-center cursor-pointer hover:bg-gray-800/20 px-2 py-1 rounded transition-colors">
+            <input
+              type="checkbox"
+              checked={formData.primaryInterest.includes(option)}
+              onChange={() => {
+                setFormData((prev) => ({
+                  ...prev,
+                  primaryInterest: prev.primaryInterest.includes(option)
+                    ? prev.primaryInterest.filter((item) => item !== option)
+                    : [...prev.primaryInterest, option],
+                }));
+              }}
+              className="mr-3 w-4 h-4 text-[#5AA5E9] bg-transparent border-gray-600 rounded focus:ring-[#5AA5E9] focus:ring-2 focus:ring-offset-0"
+            />
+            <span className="text-white text-lg font-light">{option}</span>
+          </label>
+        ))}
+      </div>
       {errors.primaryInterest && (
         <p className="text-red-500 text-sm mt-1">{errors.primaryInterest}</p>
       )}
+
+      <label className="block mb-1">Other Interests</label>
+      <input 
+        name="otherInterests" 
+        value={formData.otherInterests} 
+        onChange={(e) => setFormData({ ...formData, otherInterests: e.target.value })} 
+        placeholder="Please specify any other interests not listed above" 
+        className="w-full border border-gray-600 rounded px-3 py-2 text-lg font-light" 
+      />
 
       <label className="block mb-1">Inquiry Details *</label>
       <textarea 
