@@ -94,7 +94,7 @@ export const Footer = () => {
               <a href="#hero">www.majarah.co</a>
             </li>
             <li className="hover:text-white transition-colors duration-300">
-              Dubai,<br />United Arab Emirates
+            Office 307-0151, Dubai Investments Park 1, Dubai,<br />United Arab Emirates
             </li>
           </ul>
         </motion.div>

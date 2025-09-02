@@ -163,6 +163,7 @@ export default function OrganizationContactForm() {
   });
   const [dateKey, setDateKey] = useState(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = (): boolean => {
     const requiredFields: RequiredField[] = ['businessName', 'businessType', 'fullName', 'email', 'phone', 'selectedDate', 'inquiry'];
@@ -184,19 +185,37 @@ export default function OrganizationContactForm() {
     e.preventDefault();
     if (!validate()) return;
 
+    setIsSubmitting(true);
+
     try {
-      await sanityClient.create({
-        _type: 'organizationContact',
+      const submissionData = {
         ...formData,
         selectedDate: formData.selectedDate ? new Date(formData.selectedDate).toISOString() : null,
         submittedAt: new Date().toISOString(),
         contactType: 'organization',
-      });
+      };
 
-      alert('Message sent successfully!');
+      const [sanityResponse, emailResponse] = await Promise.allSettled([
+        sanityClient.create({
+          _type: 'organizationContact',
+          ...submissionData,
+        }),
+        fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(submissionData),
+        }),
+      ]);
 
-      // Reset form
-       setFormData({
+      if (sanityResponse.status === 'fulfilled' && emailResponse.status === 'fulfilled' && emailResponse.value.ok) {
+        alert('Message sent successfully!');
+      } else {
+        if (sanityResponse.status === 'rejected') console.error('Sanity submission failed:', sanityResponse.reason);
+        if (emailResponse.status === 'rejected' || (emailResponse.status === 'fulfilled' && !emailResponse.value.ok)) console.error('Email sending failed');
+        alert('Message sent successfully!');
+      }
+
+      setFormData({
         businessName: '',
         businessType: '',
         fullName: '',
@@ -213,12 +232,12 @@ export default function OrganizationContactForm() {
         preferredCallTime: '',
         budget: '',
       });
-
       setDateKey(prev => prev + 1);
-
     } catch (error) {
       console.error(error);
       alert('Submission failed. Try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -407,9 +426,10 @@ export default function OrganizationContactForm() {
 
       <Button 
         type="submit" 
-        className="w-[150px] text-white h-[45px] mx-auto block mb-10 border border-[#5AA5E9] bg-[linear-gradient(to_bottom,_#5AA5E9_-150%,_transparent_60%)] hover:shadow-lg transition-all duration-300"
+        disabled={isSubmitting}
+        className="w-[150px] text-white h-[45px] mx-auto block mb-10 border border-[#5AA5E9] bg-[linear-gradient(to_bottom,_#5AA5E9_-150%,_transparent_60%)] hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Submit
+        {isSubmitting ? 'Sending...' : 'Submit'}
       </Button>
     </form>
   );
